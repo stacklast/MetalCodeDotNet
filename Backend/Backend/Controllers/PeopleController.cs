@@ -28,6 +28,19 @@ namespace Backend.Controllers
             Repository.people
             .Where(p => p.Name.ToUpper().Contains(search.ToUpper()))
             .ToList();
+
+        [HttpPost]
+        public IActionResult Add(People people)
+        {
+            if(string.IsNullOrEmpty(people.Name))
+            {
+                return BadRequest();
+            }
+
+            Repository.people.Add(people);
+
+            return NoContent();
+        }
     }
 
     public class Repository
