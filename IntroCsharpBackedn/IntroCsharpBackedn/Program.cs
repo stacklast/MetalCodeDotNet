@@ -1,48 +1,43 @@
-﻿var sale = new Sale(15);
-//Sale sale = new ();
-sale.Total = 15;
+﻿using System;
 
-var saleWithTax = new SaleWithTax(15, 1.16m);
+var sale = new Sale();
+var beer = new Beer();
 
-var message = saleWithTax.GetInfo();
+Some(sale);
+Some(beer);
 
-Console.WriteLine(message);
+void Some(ISave save) 
+{ 
+    save.Save();
+}
 
-class SaleWithTax: Sale
+interface ISale
 {
-    public decimal Tax { get; set; }
-    public SaleWithTax(decimal total, decimal tax): base(total)
-    {
-        Tax = tax;
-    }
+    decimal Total { get; set; }
+}
 
-    //override metodo del padre con virtual
-    public override string GetInfo()
-    {
-        return "El total es " + Total + " Impuesto: " + Tax;
-    }
+interface ISave
+{
+    public void Save();
+}
 
-    //sobrecarga metodos con el mismo nombre en la misma clase
-    public string GetInfo(string message)
+public class Sale : ISale, ISave
+{
+    public Sale() { }
+
+    public decimal Total { get; set; }
+
+    public void Save()
     {
-        return message;
+        Console.WriteLine("se guardo en DB");
     }
 }
 
-class Sale
+public class Beer: ISave
 {
-    public decimal Total { get; set; }
-    private decimal _some;
-
-    public Sale(decimal total)
+    public Beer() { }
+    public void Save()
     {
-        Total = total;
-        _some = 8;
-    }
-
-    //virtual para sobreescritura
-    public virtual string GetInfo()
-    {
-        return "El total es " + Total + _some;
+        Console.WriteLine("se guardo en Servicio");
     }
 }
