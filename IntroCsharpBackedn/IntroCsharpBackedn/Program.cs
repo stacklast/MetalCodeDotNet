@@ -1,43 +1,90 @@
-﻿using System;
+﻿var numbers = new MyList<int>(5);
+var names = new MyList<string>(5);
+var beers = new MyList<Beer>(3);
 
-var sale = new Sale();
-var beer = new Beer();
+numbers.Add(1);
+numbers.Add(2);
+numbers.Add(3);
+numbers.Add(4);
+numbers.Add(5);
+numbers.Add(6);
 
-Some(sale);
-Some(beer);
+Console.WriteLine(numbers.GetContent());
 
-void Some(ISave save) 
-{ 
-    save.Save();
-}
+names.Add("nombres1");
+names.Add("nombres2");
+names.Add("nombres3");
+names.Add("nombres4");
+names.Add("nombres5");
+names.Add("nombres6");
 
-interface ISale
+Console.WriteLine(names.GetContent());
+
+beers.Add(new Beer()
 {
-    decimal Total { get; set; }
-}
+     Name = "Erdinger",
+     Price = 5
+});
 
-interface ISave
+beers.Add(new Beer()
 {
-    public void Save();
-}
+    Name = "Corona",
+    Price = 5
+});
 
-public class Sale : ISale, ISave
+beers.Add(new Beer()
 {
-    public Sale() { }
+    Name = "Pilsener",
+    Price = 5
+});
 
-    public decimal Total { get; set; }
+beers.Add(new Beer()
+{
+    Name = "Club",
+    Price = 5
+});
 
-    public void Save()
+Console.WriteLine(beers.GetContent());
+
+Console.ReadKey();
+
+public class MyList<T>
+{
+    private List<T> _list;
+    private int _limit;
+
+    public MyList(int limit) 
+    { 
+        _limit = limit;
+        _list = new List<T>();
+    }
+
+    public void Add(T element)
     {
-        Console.WriteLine("se guardo en DB");
+        if (_list.Count < _limit)
+        {
+            _list.Add(element);
+        }
+    }
+
+    public string GetContent()
+    {
+        string content = "";
+        foreach (var element in _list)
+        {
+            content += element + ", ";
+        }
+        return content;
     }
 }
 
-public class Beer: ISave
+public class Beer
 {
-    public Beer() { }
-    public void Save()
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+
+    public override string ToString()
     {
-        Console.WriteLine("se guardo en Servicio");
+        return "Name: " + Name + " Price: "+ Price;
     }
 }
