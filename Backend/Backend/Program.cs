@@ -17,7 +17,7 @@ builder.Services.AddScoped<IPostsService, PostsService>();
 //httpclient luego de los servicios
 builder.Services.AddHttpClient<IPostsService, PostsService>( c => 
 {
-    c.BaseAddress = new Uri("https://jsonplaceholder.typicode.com/posts");
+    c.BaseAddress = new Uri(builder.Configuration["BaseUrlPosts"]);
  });
 
 builder.Services.AddControllers();
