@@ -1,30 +1,19 @@
-﻿using System.Text.Json;
+﻿Func<int, int, int> sub = (a,b) => a - b;
 
-var edwin = new People()
+Func<int, int> some = a => a * 2;
+
+Func<int, int> some2 = a =>
 {
-    Name = "Edwin",
-    Age = 666,
+    a = a + 1;
+
+    return a * 5 ;
 };
 
-string json = JsonSerializer.Serialize(edwin);
+sub(1, 4);
 
-Console.WriteLine(json);
+Some((a, b) => a + b, 5);
 
-string myJson = @"{
-    ""Name"":""Juan"",
-    ""Age"":666
-    }";
-
-People? juan = JsonSerializer.Deserialize<People>(myJson);
-
-Console.WriteLine(juan?.Name);
-Console.WriteLine(juan?.Age);
-
-Console.ReadKey();
-
-public class People
+void Some(Func<int, int, int> fn, int number)
 {
-    public string Name { get; set; }
-    public int Age { get; set; }
-
+    var result = fn(number, number);
 }
