@@ -8,10 +8,19 @@ namespace Backend.Controllers
     public class PeopleController : ControllerBase
     {
         [HttpGet("alll")]
-        public List<People> GetPeople() => Respository.people;
+        public List<People> GetPeople() => Repository.people;
+
+        [HttpGet("{id}")]
+        public People Get(int id) => Repository.people.First(p=>p.Id == id);
+
+        [HttpGet("search/{search}")]
+        public List<People> Get(string search) =>
+            Repository.people
+            .Where(p => p.Name.ToUpper().Contains(search.ToUpper()))
+            .ToList();
     }
 
-    public class Respository
+    public class Repository
     {
         public static List<People> people = new List<People>()
         {
