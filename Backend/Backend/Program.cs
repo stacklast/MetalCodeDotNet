@@ -19,6 +19,9 @@ builder.Services.AddKeyedTransient<IRandomService, RandomService>("randomTransie
 
 builder.Services.AddScoped<IPostsService, PostsService>();
 
+//AddScoped una llamada por cada controllador
+builder.Services.AddScoped<IBeerService, BeerService>();
+
 //httpclient luego de los servicios
 builder.Services.AddHttpClient<IPostsService, PostsService>( c => 
 {
