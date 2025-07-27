@@ -14,6 +14,8 @@ namespace Backend.AutoMappers
             //in, out con un campo diferente
             CreateMap<Beer, BeerDto>()
                 .ForMember(dto => dto.Id, m=> m.MapFrom(beer => beer.BeerID));
+
+            CreateMap<BeerUpdateDto, Beer>();
         }
     }
 }

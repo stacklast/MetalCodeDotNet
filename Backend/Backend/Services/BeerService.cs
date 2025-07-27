@@ -56,9 +56,7 @@ namespace Backend.Services
 
             if (beer != null)
             {
-                beer.Name = beerUpdateDto.Name;
-                beer.Alcohol = beerUpdateDto.Alcohol;
-                beer.BrandID = beerUpdateDto.BrandID;
+                beer = _mapper.Map<BeerUpdateDto, Beer>(beerUpdateDto, beer);
 
                 _beerRepository.Update(beer);
                 await _beerRepository.Save();
