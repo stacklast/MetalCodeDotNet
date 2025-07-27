@@ -58,8 +58,8 @@ namespace Backend.Services
                 BrandID = beerInsertDto.BrandID,
             };
 
-            await _context.Beers.AddAsync(beer);
-            await _context.SaveChangesAsync();
+            await _beerRepository.Add(beer);
+            await _beerRepository.Save();
 
             var beerDto = new BeerDto
             {
