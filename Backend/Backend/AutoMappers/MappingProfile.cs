@@ -8,8 +8,12 @@ namespace Backend.AutoMappers
     {
         public MappingProfile() 
         {
-            //in, out
+            //in, out campos iguales
             CreateMap<BeerInsertDto, Beer>();
+
+            //in, out con un campo diferente
+            CreateMap<Beer, BeerDto>()
+                .ForMember(dto => dto.Id, m=> m.MapFrom(beer => beer.BeerID));
         }
     }
 }
