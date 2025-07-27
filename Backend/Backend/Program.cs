@@ -44,7 +44,7 @@ builder.Services.AddDbContext<StoreContext>(options =>
 builder.Services.AddScoped<IValidator<BeerInsertDto>, BeerInsertValidator>();
 builder.Services.AddScoped<IValidator<BeerUpdateDto>, BeerUpdateValidator>();
 
-//AutoMappers
+//AutoMappers to use IMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddControllers();
