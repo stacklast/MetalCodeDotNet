@@ -24,7 +24,9 @@ namespace Backend.Repository
 
         public void Update(Beer beer)
         {
-            throw new NotImplementedException();
+            // adjunta la entidad al contexto
+            _context.Beers.Attach(beer);
+            _context.Beers.Entry(beer).State = EntityState.Modified;
         }
 
         public void Delete(Beer entity)

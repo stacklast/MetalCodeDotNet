@@ -73,15 +73,16 @@ namespace Backend.Services
         }
         public async Task<BeerDto> Update(int id, BeerUpdateDto beerUpdateDto)
         {
-            var beer = await _context.Beers.FindAsync(id);
+            var beer = await _beerRepository.GetById(id);
 
-            if(beer != null)
+            if (beer != null)
             {
                 beer.Name = beerUpdateDto.Name;
                 beer.Alcohol = beerUpdateDto.Alcohol;
                 beer.BrandID = beerUpdateDto.BrandID;
 
-                await _context.SaveChangesAsync();
+                _beerRepository.Update(beer);
+                await _beerRepository.Save();
 
                 var beerDto = new BeerDto
                 {
