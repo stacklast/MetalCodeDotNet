@@ -10,6 +10,8 @@ namespace Backend.Services
     {
         private IRepository<Beer> _beerRepository;
         private IMapper _mapper;
+        public List<string> Errors { get; set; }
+
         public BeerService(IRepository<Beer> beerRepository,
             IMapper mapper)
         {
@@ -26,7 +28,7 @@ namespace Backend.Services
 
         public async Task<BeerDto> GetById(int id)
         {
-            var beer = await _beerRepository.GetById(id);   
+            var beer = await _beerRepository.GetById(id);
 
             if (beer != null)
             {
@@ -45,7 +47,7 @@ namespace Backend.Services
             await _beerRepository.Add(beer);
             await _beerRepository.Save();
 
-            var beerDto = _mapper.Map<BeerDto>(beer);   
+            var beerDto = _mapper.Map<BeerDto>(beer);
 
             return beerDto;
         }
@@ -84,6 +86,16 @@ namespace Backend.Services
             }
 
             return null;
+        }
+
+        public bool Validate(BeerInsertDto dto)
+        {
+            return true;
+        }
+
+        public bool Validate(BeerUpdateDto dto)
+        {
+            return true;
         }
     }
 }
