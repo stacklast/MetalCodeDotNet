@@ -4,6 +4,7 @@ using Backend.Services;
 using Backend.Validators;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,7 @@ builder.Services.AddKeyedTransient<IRandomService, RandomService>("randomTransie
 builder.Services.AddScoped<IPostsService, PostsService>();
 
 //AddScoped una llamada por cada controllador
-builder.Services.AddScoped<IBeerService, BeerService>();
+builder.Services.AddKeyedScoped<ICommonService<BeerDto, BeerInsertDto, BeerUpdateDto>, BeerService>("beerService");
 
 //httpclient luego de los servicios
 builder.Services.AddHttpClient<IPostsService, PostsService>( c => 
